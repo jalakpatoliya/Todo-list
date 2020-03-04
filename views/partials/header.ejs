@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.js">
+  </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+  <link rel="stylesheet" href="/stylesheets/main.css">
+
+  <script
+    src='https://maps.googleapis.com/maps/api/js?key=AIzaSyD7RDAq6Ei7au_EByvVb_1MCLnKpnNtpHM&v=3.exp&sensor=false&libraries=places'></script>
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+    rel="stylesheet" type="text/css" />
+  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script
+    src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+  <meta charset="utf-8">
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<body>
+  <br>
+  <div class="ui container">
+
+    <!-- adding pointing menu -->
+    <!-- <div class="ui secondary pointing menu">
+      <a class="active item nva" href="/company/all">
+        <i class="address card outline icon"></i>All Company</a>
+
+      <a class="item nav" href="/company/create">
+        <i class="user icon"></i>Add a Company</a>
+
+    </div> -->
+    <!-- added -->
+
+
+    <div class="ui secondary  menu">
+
+      <a class=" item" href="/">
+        Home
+      </a>
+      <a class="item" href="/list/all">
+        List
+      </a>
+      <!-- <a class="item" href="/customsearch">
+        View Data
+      </a> -->
+      <!-- <div class="right menu">
+        <div class="item">
+          <div class="ui icon input">
+            <form action="/search" method="get">
+              <input type="text" placeholder="Search..." name="search_query">
+            </form>
+            <i class="search link icon"></i>
+          </div>
+        </div>
+      </div> -->
+
+
+    </div>
+
+
+    <div class="ui right floated list ">
+
+
+      <a class=" item" href="/register">Sign Up as user</a>
+      <!-- <a class=" item" href="/login">Login as user</a> -->
+      <hr>
+      <a class=" item" href="/logout">Logout</a>
+      <%  if (!currentUser) {  %>
+      <a href="/login">Login</a>
+      <hr>
+      <% } else if(currentUser.role=="user"){ %>
+      <hr> <a href="#">Signed in as <%= currentUser.username%></a>
+      <hr> <a class=" item" href="/logout">Logout</a>
+      <% }else if (currentUser.role=="admin") { %>
+      <div class="ui top right attached label">Admin</div>
+      <hr> <a href="#">Signed in as <%= currentUser.username%></a><br>
+      <a class=" item" href="/register">Sign Up a user</a>
+      <a class=" item" href="/login">Login as user</a>
+      <hr> <a class=" item" href="/logout">Logout</a>
+      <% } %>
+
+    </div>
