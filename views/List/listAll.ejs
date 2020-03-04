@@ -14,12 +14,15 @@
             %>
     <div class="ui segments compact">
         <div class="ui red segment">
-            <h2 class="ui small header">
+            <h2>
                 <%=list.name %>
+                <!-- <h2 class="ui small header">
+                    <%=list.name %>
+                </h2> -->
                 <button data-value=<%=list._id %> class="ui icon button yellow
-                circular
-                tiny
-                create_task" type="button"><i class="plus icon"></i></button>
+                    tiny circular create_task" type="button"><i class="plus icon"></i></button>
+                <button data-list=<%=list._id %> class="ui icon button red
+                        tiny circular delete_list" type="button"><i class="minus icon"></i></button>
             </h2>
         </div>
         <div class=" ui segments">
@@ -27,12 +30,15 @@
                                 const task = list.tasks[i];
                             %>
             <div class="ui segment">
-                <h2 class="ui tiny header">
+
+                <!-- <h2 class="ui tiny header"> -->
+                <!-- </h2> -->
+                <h4>
                     <%=task.description %>
                     <button data-list=<%=list._id %> data-task=<%=task._id %>
                         class="ui icon button red circular tiny delete_task" type="button"><i
                             class="minus icon"></i></button>
-                </h2>
+                </h4>
             </div>
             <% } %>
         </div>
@@ -53,8 +59,6 @@
                         </div>
                     </div>
                 </div>
-
-
         </div>
         <div class="actions">
             <input type="submit" class="ui basic green button" value="Create">
@@ -79,7 +83,7 @@
                     <div class="field">
                         <div class="required field">
                             <label>Task Description</label>
-                            <input required name="description" type="text" placeholder="name" maxlength="50"
+                            <input required name="description" type="text" placeholder="name" maxlength="200"
                                 minlength="1">
                         </div>
                     </div>
@@ -92,6 +96,39 @@
         </div>
     </div>
     <!-- create task modal -->
+
+
+
+    <!-- MODAL to delete a list -->
+    <div class="ui mini modal delete_list_modal">
+        <div class="header">Delete a list</div>
+        <div class="content">
+            <h2>Are you sure you want to delete this list?</h2>
+            <form class="ui form" action="/list/delete" method="post">
+                <div class="fields">
+                    <!-- <div class="field"> -->
+                    <!-- <div class="required field">
+                                <label>List Name</label>
+                                <input required name="name" type="text" placeholder="name" maxlength="50" minlength="1">
+                            </div> -->
+                    <!-- </div> -->
+                    <div class="field">
+                        <div class="required field">
+                            <!-- <label>Task Name</label> -->
+                            <input hidden required name="listId" type="text" placeholder="name" maxlength="50"
+                                minlength="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <input type="submit" class="ui basic red button" value="Delete">
+            </form>
+            <!-- <div class="ui basic red button">close</div> -->
+        </div>
+    </div>
+    <!-- delete list modal -->
+
 
     <!-- MODAL to delete a task -->
     <div class="ui mini modal delete_task_modal">
@@ -142,6 +179,19 @@
 
                 $(".task").modal('show');
                 $('input[name=listId]').val(value);
+            });
+            $(".task").modal({
+                closable: true
+            });
+        });
+
+        // delete list modal
+        $(function () {
+            $(".delete_list").click(function () {
+                $(".delete_list_modal").modal('show');
+                var listId = $(this).data('list');
+                console.log('listId is ', listId);
+                $('input[name=listId]').val(listId);
             });
             $(".task").modal({
                 closable: true

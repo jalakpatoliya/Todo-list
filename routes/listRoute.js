@@ -51,6 +51,28 @@ router.post('/list/create',
         return res.redirect('/list/all')
         // return res.json(listData);
     });
+
+/**
+* Delete a list
+*/
+router.post('/list/delete',
+    middleware.isLoggedin,
+    async function (req, res) {
+        /**
+         * delete a task
+         */
+        const { listId } = req.body;
+        const userId = req.user._id;
+
+        const data = await List.findOneAndRemove({ 'creator.id': userId, '_id': listId });
+
+        console.log(data);
+
+        return res.redirect('/list/all')
+    }
+);
+
+
 /**
  * Create a new task
  */
@@ -78,7 +100,7 @@ router.post('/task/create',
 );
 
 /**
- * Delete a new task
+ * Delete a  task
  */
 router.post('/task/delete',
     middleware.isLoggedin,
