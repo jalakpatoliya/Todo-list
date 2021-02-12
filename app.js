@@ -9,15 +9,11 @@ const mongoose = require("mongoose");
 const expressSession = require("express-session");
 const flash = require('connect-flash');
 
-// mongoose.connect("mongodb://localhost/auth_demo",{
-//   useMongoClient:true
-// })
-mongoose.connect(`${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@ds119663.mlab.com:19663/todo-list`, (err, data) => {
+mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0-shard-00-00.fq8bp.mongodb.net:27017,cluster0-shard-00-01.fq8bp.mongodb.net:27017,cluster0-shard-00-02.fq8bp.mongodb.net:27017/database?ssl=true&replicaSet=atlas-ikvjhw-shard-0&authSource=admin&retryWrites=true&w=majority`, { useMongoClient: true, }, (err, data) => {
   if (err) { console.log('connection error', err); } else {
     console.log('DB connected sucessfully');
   }
 });
-
 
 mongoose.Promise = global.Promise;
 
